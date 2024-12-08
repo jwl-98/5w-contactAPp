@@ -8,7 +8,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    let cellView = TableViewCell()
+    
+    override func loadView() {
+        view = cellView.contentView
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
