@@ -13,9 +13,10 @@ class ListViewController: UIViewController {
     var dummyData = DummyData()
     
     var pokeUrl = PokemonUrl()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNaviBar()
         configureUI()
         dummyData.makeDummyData()
         dummyArray = dummyData.getDummyDate()
@@ -24,7 +25,7 @@ class ListViewController: UIViewController {
     private lazy var uiView: UIView = {
         let view = UIView()
         
-        view.backgroundColor = .white
+        view.backgroundColor = .clear
         view.addSubview(label)
         view.addSubview(addButton)
         
@@ -32,7 +33,8 @@ class ListViewController: UIViewController {
     }()
     private let label: UILabel = {
         let label = UILabel()
-        label.text = "친구 목록"
+        label.backgroundColor = .clear
+        label.text = ""
         label.font = .boldSystemFont(ofSize: 20)
         
         return label
@@ -51,7 +53,7 @@ class ListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.id)
-    
+        
         
         return tableView
     }()
@@ -59,30 +61,18 @@ class ListViewController: UIViewController {
     private func configureUI() {
         [
             tableView,
-            uiView
         ].forEach{view.addSubview($0)}
         
         tableView.snp.makeConstraints {
-            $0.top.equalTo(uiView.snp.bottom).offset(0)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
-        uiView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(0)
-            $0.height.equalTo(80)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
-        }
-        label.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview()
-        }
-        addButton.snp.makeConstraints {
-            $0.centerY.equalTo(label.snp.centerY)
-            $0.trailing.equalToSuperview().offset(-20)
-        }
+        
     }
+    
+    
     //데이터를 가져오는 기능을 하는 함수 선언
     //받아야 할 데이터: 캐릭터 이미지, 이름
     func fetchData<JSON: Decodable>(url: URL, completion: @escaping (JSON?) -> Void){
@@ -124,7 +114,28 @@ class ListViewController: UIViewController {
     }
     
 }
-
+//네비게이션 바 설정
+extension ListViewController {
+    func setupNaviBar() {
+        title = "친구목록"
+        let appearance = UINavigationBarAppearance()
+        let button = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(buttonTapped))
+        navigationItem.rightBarButtonItem = button
+        button.tintColor = .darkGray
+        appearance.configureWithOpaqueBackground()
+        appearance.titleTextAttributes =  [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
+        appearance.backgroundColor = .white
+        navigationController?.navigationBar.tintColor = .systemBlue
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
+    @objc func buttonTapped() {
+        print("버튼이눌림")
+    }
+    
+}
 extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.id) as? TableViewCell else {
@@ -147,3 +158,7 @@ extension ListViewController: UITableViewDelegate {
         80
     }
 }
+
+//#Preview {
+//    ListViewController()
+//}
