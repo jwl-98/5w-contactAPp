@@ -7,8 +7,14 @@
 
 import Foundation
 struct PokemonUrl {
-    func createUrl() -> String{
-        return "https://pokeapi.co/api/v2/pokemon/\(GenerateID().getId())"
+    let id = Int.random(in: 1...1025)
+   
+    func createUrl() -> String {
+        print(id)
+        return "https://pokeapi.co/api/v2/pokemon/\(id)"
     }
     
+    func getKrNameURL() -> String {
+        return "https://pokeapi.co/api/v2/pokemon-species/\(id)"
+    }
 }
