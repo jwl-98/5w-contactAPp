@@ -9,10 +9,9 @@ import UIKit
 
 class PhoneBookView: UIView {
     
-    private let imageView: UIImageView = {
+    var imageView: UIImageView = {
         let imageView = UIImageView()
-        
-        imageView.backgroundColor = .red
+    
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.gray.cgColor
         imageView.layer.cornerRadius = 100
@@ -21,7 +20,7 @@ class PhoneBookView: UIView {
         return imageView
     }()
     
-     var randomButton: UIButton = {
+    var randomButton: UIButton = {
         let button = UIButton()
         
         button.setTitle("랜덤 이미지 생성", for: .normal)
@@ -39,18 +38,10 @@ class PhoneBookView: UIView {
         
         return stackView
     }()
-    private let nameTextView: UITextView = {
-        let textView = UITextView()
-        textView.layer.borderColor = UIColor.lightGray.cgColor
-        textView.layer.borderWidth = 1
-        textView.layer.cornerRadius = 10
-        textView.clipsToBounds = true
-        return textView
-    }()
-    
-    private let phoneNumberTextView: UITextView = {
+    var nameTextView: UITextView = {
         let textView = UITextView()
         
+        textView.font = .systemFont(ofSize: 20)
         textView.layer.borderColor = UIColor.lightGray.cgColor
         textView.layer.borderWidth = 1
         textView.layer.cornerRadius = 10
@@ -58,6 +49,17 @@ class PhoneBookView: UIView {
         return textView
     }()
     
+    let phoneNumberTextView: UITextView = {
+        let textView = UITextView()
+        
+        textView.font = .systemFont(ofSize: 20)
+        textView.layer.borderColor = UIColor.lightGray.cgColor
+        textView.layer.borderWidth = 1
+        textView.layer.cornerRadius = 10
+        textView.clipsToBounds = true
+        textView.keyboardType = .numberPad
+        return textView
+    }()
     
     private func configureUI() {
         [
@@ -92,6 +94,7 @@ class PhoneBookView: UIView {
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = .white
         configureUI()
     }
     
@@ -100,7 +103,7 @@ class PhoneBookView: UIView {
     }
     
 }
-#Preview {
-    PhoneBookViewController()
-}
+//#Preview {
+//    PhoneBookViewController()
+//}
 

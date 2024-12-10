@@ -9,8 +9,7 @@
 import Foundation
 //sprites그룹의 officialArtWork 이미지 사용
 
-struct PokemonData: Codable {
-    let id: Int
+struct PokemonDataJson: Codable {
     let name: String
     let sprites: ItemSprites
 }
@@ -34,3 +33,4 @@ struct OfficialArtWork: Codable {
         case frontDefault = "front_default"
     }
 }
+

@@ -45,15 +45,17 @@ class FistViewController: UIViewController {
     }
     
    @objc private func naviBarButtonTapped() {
-       print("네비바 버튼이눌림")
+       let phoneBookVC = PhoneBookViewController()
+    
+       phoneBookVC.modalPresentationStyle = .fullScreen
+       //self.present(phoneBookVC, animated: true, completion: nil)
+       navigationController?.pushViewController(phoneBookVC, animated: true)
+       print("네비버튼눌림")
     }
-    
-    
 }
 //네비게이션 바 설정
 extension FistViewController {
     func setupNaviBar() {
-        title = "친구목록"
         let appearance = UINavigationBarAppearance()
         let button = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(naviBarButtonTapped))
         navigationItem.rightBarButtonItem = button
@@ -65,6 +67,7 @@ extension FistViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        title = "친구목록"
     }
     
 }

@@ -8,10 +8,10 @@
 import Foundation
 
 class DataManager {
-    var pokeUrl = PokemonUrl()
+
     //데이터를 가져오는 기능을 하는 함수 선언
     //받아야 할 데이터: 캐릭터 이미지, 이름
-    func fetchData<JSON: Decodable>(url: URL, completion: @escaping (JSON?) -> Void){
+     func fetchData<JSON: Decodable>(url: URL, completion: @escaping (JSON?) -> Void){
         let session = URLSession(configuration: .default)
         session.dataTask(with: URLRequest(url: url)) { data, response, error in
             guard let data, error == nil else {
@@ -27,7 +27,6 @@ class DataManager {
                     return
                 }
                 completion(decodeData)
-                print(decodeData)
             }else{
                 print(url.absoluteString)
                 completion(nil)
@@ -35,17 +34,19 @@ class DataManager {
         }.resume()
     }
     
-    func fetchPokemonData() {
-        let urlComponets = URLComponents(string: pokeUrl.createUrl())
-        
-        guard let url = urlComponets?.url else {
-            print("잘못된 URL")
-            return
-        }
-        fetchData(url: url) { [weak self] (result: PokemonData?) in
-            guard let self, let result else { return }
-            
-        }
-        
-    }
+//    private func fetchPokemonData() {
+//        let urlComponets = URLComponents(string: pokeUrl.createUrl())
+//        
+//        guard let url = urlComponets?.url else {
+//            print("잘못된 URL")
+//            return
+//        }
+//        fetchData(url: url) { (result: PokemonDataJson?) in
+//            guard let result else { return }
+//            let name = result.name
+//            let imageUrl = result.sprites.other.officialArtWork.frontDefault
+//            self.pokemonData.name = name
+//            self.pokemonData.imageUrl = imageUrl
+//        }
+//    }
 }
