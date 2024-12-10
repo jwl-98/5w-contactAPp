@@ -74,7 +74,5 @@ final class TableViewCell: UITableViewCell {
     }
     
 }
-#Preview {
-    ListViewController()
-}
+
 
