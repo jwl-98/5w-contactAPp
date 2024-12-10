@@ -12,41 +12,14 @@ class FistViewController: UIViewController {
     var dummyArray: [Dummy] = []
     var dummyData = DummyData()
     
-    var pokeUrl = PokemonUrl()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNaviBar()
         configureUI()
         dummyData.makeDummyData()
         dummyArray = dummyData.getDummyDate()
-        
     }
-    private lazy var uiView: UIView = {
-        let view = UIView()
-        
-        view.backgroundColor = .clear
-        view.addSubview(label)
-        view.addSubview(addButton)
-        
-        return view
-    }()
-    private let label: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = .clear
-        label.text = ""
-        label.font = .boldSystemFont(ofSize: 20)
-        
-        return label
-    }()
-    
-    private let addButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("추가", for: .normal)
-        button.setTitleColor(UIColor.gray, for: .normal)
-        
-        return button
-    }()
+
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -69,49 +42,12 @@ class FistViewController: UIViewController {
             $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
-        
     }
     
-    
-    //데이터를 가져오는 기능을 하는 함수 선언
-    //받아야 할 데이터: 캐릭터 이미지, 이름
-    func fetchData<JSON: Decodable>(url: URL, completion: @escaping (JSON?) -> Void){
-        let session = URLSession(configuration: .default)
-        session.dataTask(with: URLRequest(url: url)) { data, response, error in
-            guard let data, error == nil else {
-                print("데이터 로드 실패")
-                completion(nil)
-                return
-            }
-            let sucessRange = 200..<300
-            if let response = response as? HTTPURLResponse, sucessRange.contains(response.statusCode) {
-                guard let decodeData = try? JSONDecoder().decode(JSON.self, from: data) else {
-                    print("JSON데이터 디코딩 실패")
-                    completion(nil)
-                    return
-                }
-                completion(decodeData)
-                print(decodeData)
-            }else{
-                print(url.absoluteString)
-                completion(nil)
-            }
-        }.resume()
+   @objc private func naviBarButtonTapped() {
+       print("네비바 버튼이눌림")
     }
     
-    func fetchPokemonData() {
-        let urlComponets = URLComponents(string: pokeUrl.createUrl())
-        
-        guard let url = urlComponets?.url else {
-            print("잘못된 URL")
-            return
-        }
-        fetchData(url: url) { [weak self] (result: PokemonData?) in
-            guard let self, let result else { return }
-            
-        }
-        
-    }
     
 }
 //네비게이션 바 설정
@@ -119,7 +55,7 @@ extension FistViewController {
     func setupNaviBar() {
         title = "친구목록"
         let appearance = UINavigationBarAppearance()
-        let button = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(buttonTapped))
+        let button = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(naviBarButtonTapped))
         navigationItem.rightBarButtonItem = button
         button.tintColor = .darkGray
         appearance.configureWithOpaqueBackground()
@@ -129,10 +65,6 @@ extension FistViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-    }
-    
-    @objc func buttonTapped() {
-        print("버튼이눌림")
     }
     
 }
