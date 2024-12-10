@@ -7,8 +7,12 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
-
+class PhoneBookViewController: UIViewController {
+    let vv = DetailView()
+    
+    override func loadView() {
+        view = vv
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
