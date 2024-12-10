@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailView: UIView {
+class PhoneBookView: UIView {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -21,13 +21,12 @@ class DetailView: UIView {
         return imageView
     }()
     
-    private let randomButton: UIButton = {
+     var randomButton: UIButton = {
         let button = UIButton()
         
         button.setTitle("랜덤 이미지 생성", for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 15)
         button.setTitleColor(UIColor.gray, for: .normal)
-
         
         return button
     }()

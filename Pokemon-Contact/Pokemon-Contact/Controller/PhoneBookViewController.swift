@@ -8,26 +8,23 @@
 import UIKit
 
 class PhoneBookViewController: UIViewController {
-    let vv = DetailView()
+    let phoneBookView = PhoneBookView()
     
     override func loadView() {
-        view = vv
+        view = phoneBookView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupAppTarget()
         // Do any additional setup after loading the view.
     }
+
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setupAppTarget(){
+        phoneBookView.randomButton.addTarget(self, action: #selector(randomButtonTapped), for: .touchUpInside)
     }
-    */
-
+    
+    @objc func randomButtonTapped() {
+        print("버튼툴림")
+    }
 }

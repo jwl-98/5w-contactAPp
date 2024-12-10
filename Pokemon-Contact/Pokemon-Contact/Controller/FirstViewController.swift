@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ListViewController: UIViewController {
+class FistViewController: UIViewController {
     var dummyArray: [Dummy] = []
     var dummyData = DummyData()
     
@@ -115,7 +115,7 @@ class ListViewController: UIViewController {
     
 }
 //네비게이션 바 설정
-extension ListViewController {
+extension FistViewController {
     func setupNaviBar() {
         title = "친구목록"
         let appearance = UINavigationBarAppearance()
@@ -136,7 +136,7 @@ extension ListViewController {
     }
     
 }
-extension ListViewController: UITableViewDataSource {
+extension FistViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.id) as? TableViewCell else {
             return UITableViewCell()
@@ -153,7 +153,7 @@ extension ListViewController: UITableViewDataSource {
     }
     
 }
-extension ListViewController: UITableViewDelegate {
+extension FistViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         80
     }
