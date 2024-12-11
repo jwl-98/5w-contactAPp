@@ -10,6 +10,7 @@ import UIKit
 class PhoneBookViewController: UIViewController {
     let phoneBookView = PhoneBookView()
     let dataManager = DataManager()
+    var pokemonURL = PokemonUrl()
     
     override func loadView() {
         view = phoneBookView
@@ -31,18 +32,21 @@ class PhoneBookViewController: UIViewController {
     }
     @objc func randomButtonTapped() {
         print("랜덤 버튼툴림")
+        createURL()
         fetchPokemonData()
+        fetchPokemonKRName()
     }
-    
-    private func setupUI() {
-        
-    }
-    
+
 }
 
 extension PhoneBookViewController {
+    
+    private func createURL() {
+        pokemonURL = PokemonUrl()
+    }
+    //포켓몬 이미지를 가져오는 함수
     private func fetchPokemonData() {
-        let urlComponets = URLComponents(string: PokemonUrl().createUrl())
+        let urlComponets = URLComponents(string: pokemonURL.createUrl())
         
         guard let url = urlComponets?.url else {
             print("잘못된 URL")
@@ -69,8 +73,23 @@ extension PhoneBookViewController {
             }
         }
     }
+    //포켓몬 한국이름을 가져오는 함수
+    private func fetchPokemonKRName() {
+        let urlComponets = URLComponents(string: pokemonURL.getKrNameURL())
+        
+        guard let url = urlComponets?.url else {
+            print("잘못된 URL")
+            return
+        }
+        dataManager.fetchData(url: url) { [weak self] (result: KRNameJson?) in
+            guard let self, let result else { return }
+            let name = result.names
+            print(name)
+        }
+    }
 }
 extension PhoneBookViewController {
+    //네비게이션바 설정
     func setupNaviBar() {
         let appearance = UINavigationBarAppearance()
         let rightButton = UIBarButtonItem(title: "적용", style: .plain, target: self, action: #selector(applyButtonTapped))

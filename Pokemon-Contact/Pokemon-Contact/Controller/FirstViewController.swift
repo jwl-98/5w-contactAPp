@@ -93,7 +93,3 @@ extension FistViewController: UITableViewDelegate {
         80
     }
 }
-
-//#Preview {
-//    ListViewController()
-//}
