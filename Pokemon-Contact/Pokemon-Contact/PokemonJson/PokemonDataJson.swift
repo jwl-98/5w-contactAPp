@@ -7,6 +7,7 @@
 
 
 import Foundation
+//포켓못 이름,이미지를 가져오기위한 json 처리 구조체
 //sprites그룹의 officialArtWork 이미지 사용
 
 struct PokemonDataJson: Codable {

@@ -44,7 +44,7 @@ extension PhoneBookViewController {
     private func createURL() {
         pokemonURL = PokemonUrl()
     }
-    
+    //포켓몬 이미지를 가져오는 함수
     private func fetchPokemonData() {
         let urlComponets = URLComponents(string: pokemonURL.createUrl())
         
@@ -73,6 +73,7 @@ extension PhoneBookViewController {
             }
         }
     }
+    //포켓몬 한국이름을 가져오는 함수
     private func fetchPokemonKRName() {
         let urlComponets = URLComponents(string: pokemonURL.getKrNameURL())
         
@@ -88,6 +89,7 @@ extension PhoneBookViewController {
     }
 }
 extension PhoneBookViewController {
+    //네비게이션바 설정
     func setupNaviBar() {
         let appearance = UINavigationBarAppearance()
         let rightButton = UIBarButtonItem(title: "적용", style: .plain, target: self, action: #selector(applyButtonTapped))
