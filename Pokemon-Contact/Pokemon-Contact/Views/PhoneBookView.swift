@@ -11,7 +11,7 @@ class PhoneBookView: UIView {
     
     var imageView: UIImageView = {
         let imageView = UIImageView()
-    
+        
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.gray.cgColor
         imageView.layer.cornerRadius = 100

@@ -6,40 +6,23 @@
 //
 
 import UIKit
+import CoreData
 
 class PhoneBookViewController: UIViewController {
     let phoneBookView = PhoneBookView()
-    let dataManager = DataManager()
+    let jsonDecoder = JsonDecoder()
     var pokemonURL = PokemonUrl()
+    
+    
     
     override func loadView() {
         view = phoneBookView
         setupNaviBar()
+        setupAppTarget()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupAppTarget()
-        // Do any additional setup after loading the view.
     }
-    
-    
-    func setupAppTarget(){
-        phoneBookView.randomButton.addTarget(self, action: #selector(randomButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc func applyButtonTapped() {
-        print("적용버튼 눌림")
-    }
-    @objc func randomButtonTapped() {
-        print("랜덤 버튼툴림")
-        createURL()
-        fetchPokemonData()
-        fetchPokemonKRName()
-    }
-
-}
-
-extension PhoneBookViewController {
     
     private func createURL() {
         pokemonURL = PokemonUrl()
@@ -52,7 +35,7 @@ extension PhoneBookViewController {
             print("잘못된 URL")
             return
         }
-        dataManager.fetchData(url: url) { [weak self] (result: PokemonDataJson?) in
+        jsonDecoder.fetchJsonData(url: url) { [weak self] (result: PokemonDataJson?) in
             guard let self, let result else { return }
             let name = result.name
             let imageUrl = result.sprites.other.officialArtWork.frontDefault
@@ -81,26 +64,57 @@ extension PhoneBookViewController {
             print("잘못된 URL")
             return
         }
-        dataManager.fetchData(url: url) { [weak self] (result: KRNameJson?) in
+        jsonDecoder.fetchJsonData(url: url) { [weak self] (result: KRNameJson?) in
             guard let self, let result else { return }
             let name = result.names
-            print(name)
         }
     }
+    
+    private func setupAppTarget(){
+        phoneBookView.randomButton.addTarget(self, action: #selector(randomButtonTapped), for: .touchUpInside)
+    }
+    @objc func applyButtonTapped() {
+        guard let saveName = phoneBookView.nameTextView.text , let saveNumber = phoneBookView.phoneNumberTextView.text, let saveImage = phoneBookView.imageView.image?.pngData() else {
+            errorAlert(title: "에러", message: "데이터를 입력하세요!")
+            return
+        }
+        print(saveImage.description)
+        PhoneBookDataManager.dataManager.createData(image: saveImage.base64EncodedString(), name: saveName, phoneNumber: saveNumber)
+        saveCompleteAlert(title: "저장완료", message: "저장되었습니다.")
+    }
+    
+    @objc func randomButtonTapped() {
+        print("랜덤 버튼툴림")
+        createURL()
+        fetchPokemonData()
+        fetchPokemonKRName()
+    }
+    
 }
+
 extension PhoneBookViewController {
     //네비게이션바 설정
-    func setupNaviBar() {
+   private func setupNaviBar() {
         let appearance = UINavigationBarAppearance()
         let rightButton = UIBarButtonItem(title: "적용", style: .plain, target: self, action: #selector(applyButtonTapped))
         navigationItem.rightBarButtonItem = rightButton
-        appearance.configureWithOpaqueBackground()
+        //네비게이션바 텍스트 설정
         appearance.titleTextAttributes =  [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
-        appearance.backgroundColor = .white
-        navigationController?.navigationBar.tintColor = .systemBlue
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.compactAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
         title = "연락처 추가"
     }
+    //저장완료 알림창
+    private func saveCompleteAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
+            self.navigationController?.popViewController(animated: true)
+        })
+        self.present(alert, animated: true, completion: nil)
+    }
+    //에러 알림창
+    private func errorAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
+

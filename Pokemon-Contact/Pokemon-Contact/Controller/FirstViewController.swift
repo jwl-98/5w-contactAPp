@@ -11,22 +11,28 @@ import SnapKit
 class FistViewController: UIViewController {
     var dummyArray: [Dummy] = []
     var dummyData = DummyData()
-    
+    private var phoneBookDataArray: [PhoneBookData] = []
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(#function)
         setupNaviBar()
         configureUI()
         dummyData.makeDummyData()
         dummyArray = dummyData.getDummyDate()
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        print(#function)
+        PhoneBookDataManager.dataManager.readData()
+        phoneBookDataArray = PhoneBookDataManager.dataManager.getPhoneBookData()
+        tableView.reloadData()
+    }
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.id)
-        
         
         return tableView
     }()
@@ -76,15 +82,14 @@ extension FistViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.id) as? TableViewCell else {
             return UITableViewCell()
         }
-        cell.profileImage.image = dummyArray[indexPath.row].dummyImage
-        cell.nameLabel.text = dummyArray[indexPath.row].dummyName
-        cell.phoneLabel.text = dummyArray[indexPath.row].dummyPhoneNumber
-        
+        cell.profileImage.image = UIImage(data: Data(base64Encoded: phoneBookDataArray[indexPath.row].image)!)
+        cell.nameLabel.text = phoneBookDataArray[indexPath.row].name
+        cell.phoneLabel.text = phoneBookDataArray[indexPath.row].phoneNumber
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dummyArray.count
+        return phoneBookDataArray.count
     }
     
 }
