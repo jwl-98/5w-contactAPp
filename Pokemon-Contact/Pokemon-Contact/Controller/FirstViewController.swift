@@ -12,22 +12,20 @@ class FistViewController: UIViewController {
     var dummyArray: [Dummy] = []
     var dummyData = DummyData()
     private var phoneBookDataArray: [PhoneBookData] = []
-    
-    func setUpData() {
-        phoneBookDataArray = PhoneBookDataManager.dataManager.getPhoneBookData()
-        print(phoneBookDataArray.count)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        print(#function)
-        setUpData()
-    }
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(#function)
         setupNaviBar()
         configureUI()
         dummyData.makeDummyData()
         dummyArray = dummyData.getDummyDate()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        print(#function)
+        PhoneBookDataManager.dataManager.readData()
+        phoneBookDataArray = PhoneBookDataManager.dataManager.getPhoneBookData()
+        tableView.reloadData()
     }
     
     private lazy var tableView: UITableView = {
@@ -84,9 +82,9 @@ extension FistViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.id) as? TableViewCell else {
             return UITableViewCell()
         }
-        cell.profileImage.image = dummyArray[indexPath.row].dummyImage
-        cell.nameLabel.text = dummyArray[indexPath.row].dummyName
-        cell.phoneLabel.text = dummyArray[indexPath.row].dummyPhoneNumber
+        cell.profileImage.image = UIImage(data: Data(base64Encoded: phoneBookDataArray[indexPath.row].image)!)
+        cell.nameLabel.text = phoneBookDataArray[indexPath.row].name
+        cell.phoneLabel.text = phoneBookDataArray[indexPath.row].phoneNumber
         return cell
     }
     

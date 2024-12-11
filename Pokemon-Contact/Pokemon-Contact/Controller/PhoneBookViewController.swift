@@ -12,7 +12,7 @@ class PhoneBookViewController: UIViewController {
     let phoneBookView = PhoneBookView()
     let jsonDecoder = JsonDecoder()
     var pokemonURL = PokemonUrl()
-    var container: NSPersistentContainer!
+    
     
     
     override func loadView() {
@@ -22,8 +22,6 @@ class PhoneBookViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.container = appDelegate.persistentContainer
     }
     
     private func createURL() {
@@ -76,13 +74,13 @@ class PhoneBookViewController: UIViewController {
         phoneBookView.randomButton.addTarget(self, action: #selector(randomButtonTapped), for: .touchUpInside)
     }
     @objc func applyButtonTapped() {
-        guard let saveName = phoneBookView.nameTextView.text , let saveNumber = phoneBookView.phoneNumberTextView.text, let saveImage = phoneBookView.imageView.image else {
+        guard let saveName = phoneBookView.nameTextView.text , let saveNumber = phoneBookView.phoneNumberTextView.text, let saveImage = phoneBookView.imageView.image?.pngData() else {
             errorAlert(title: "에러", message: "데이터를 입력하세요!")
             return
         }
-        print(#function)
+        print(saveImage.description)
+        PhoneBookDataManager.dataManager.createData(image: saveImage.base64EncodedString(), name: saveName, phoneNumber: saveNumber)
         saveCompleteAlert(title: "저장완료", message: "저장되었습니다.")
-        readData()
     }
     
     @objc func randomButtonTapped() {
@@ -119,36 +117,4 @@ extension PhoneBookViewController {
         self.present(alert, animated: true, completion: nil)
     }
 }
-extension PhoneBookViewController {
-    func createData(image: String, name: String, phoneNumber: String) {
-        guard let entity = NSEntityDescription.entity(forEntityName: PhoneBook.className, in: self.container.viewContext) else { return }
-        let newPhoneBook = NSManagedObject(entity: entity, insertInto: self.container.viewContext)
-        newPhoneBook.setValue(name, forKey: PhoneBook.Key.name)
-        newPhoneBook.setValue(phoneNumber, forKey: PhoneBook.Key.phoneNumber)
-        newPhoneBook.setValue(image, forKey: PhoneBook.Key.image)
-        
-        do{
-            try self.container.viewContext.save()
-            print("저장 성공")
-        } catch {
-            print("저장 실패")
-        }
-    }
-     func readData() {
-        do{
-            let phoneBooks = try self.container.viewContext.fetch(PhoneBook.fetchRequest())
-            
-            for phoneBook in phoneBooks as [NSManagedObject] {
-                if let name = phoneBook.value(forKey: PhoneBook.Key.name) as? String,
-                   let phoneNumber = phoneBook.value(forKey: PhoneBook.Key.phoneNumber)  as? String,
-                   let image = phoneBook.value(forKey: PhoneBook.Key.image) as? String {
-                    PhoneBookDataManager.dataManager.makeData(image: image, name: name, phoneNumber: phoneNumber)
-                }
-            }
-        } catch {
-            print("데이터 읽기 실패")
-        }
-    }
-  
-    
-}
+

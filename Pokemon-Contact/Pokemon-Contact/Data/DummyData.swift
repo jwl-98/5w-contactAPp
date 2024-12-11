@@ -20,7 +20,6 @@ struct DummyData {
             Dummy(dummyImage: UIImage(named: "1.png"), dummyName: "피카츄", dummyPhoneNumber: "010-0000-0001"),
             Dummy(dummyImage: UIImage(named: "2.png"), dummyName: "파이로", dummyPhoneNumber: "010-0020-0002"),
             Dummy(dummyImage: UIImage(named: "3-1.png"), dummyName: "누구냐?", dummyPhoneNumber: "010-0000-0003")
-            
         ]
     }
     func getDummyDate() -> [Dummy] {
