@@ -52,7 +52,6 @@ class PhoneBookDataManager {
        }
    }
     func createDataAarry(image: String, name: String, phoneNumber: String) {
-        print(#function)
         let phoneBookData = PhoneBookData(image: image, name: name, phoneNumber: phoneNumber)
         phoneBookDataArray.append(phoneBookData)
         print("갯수: \(phoneBookDataArray.count)")
