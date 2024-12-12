@@ -1,8 +1,11 @@
-# 코어데이터를 이용한 연락처앱
 
+<div align="center">
+   <h1>코어데이터를 이용한 연락처앱</h1>
+</div>
 
-
-
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/9c6c26a8-5e3b-4156-89fc-4ca1fb374743" width="150">
+</div>
 
 ![Simulator Screenshot - iPhone 16 Pro - 2024-12-12 at 19 45 48](https://github.com/user-attachments/assets/e6c89fc9-9142-4d8e-85c8-e3db68b06a53) |![Simulator Screenshot - iPhone 16 Pro - 2024-12-12 at 19 45 58](https://github.com/user-attachments/assets/cd2e938a-a09d-4aba-96c0-b02c89add39f) | ![Simulator Screenshot - iPhone 16 Pro - 2024-12-12 at 19 46 06](https://github.com/user-attachments/assets/a243dd78-4e5d-4ab0-8d51-cfdd8d752ca0) | ![Simulator Screenshot - iPhone 16 Pro - 2024-12-12 at 19 46 15](https://github.com/user-attachments/assets/22547881-bbab-476b-80e2-a253f972e8aa) | ![Simulator Screenshot - iPhone 16 Pro - 2024-12-12 at 19 46 19](https://github.com/user-attachments/assets/38b4ae39-eb91-4211-9c86-0b5e402344b4)
 --- | --- | --- | --- | --- |
