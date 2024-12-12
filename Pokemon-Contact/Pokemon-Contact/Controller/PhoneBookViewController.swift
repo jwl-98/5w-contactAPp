@@ -13,13 +13,12 @@ class PhoneBookViewController: UIViewController {
     let jsonDecoder = JsonDecoder()
     var pokemonURL = PokemonUrl()
     
-    
-    
     override func loadView() {
         view = phoneBookView
         setupNaviBar()
         setupAppTarget()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -30,7 +29,6 @@ class PhoneBookViewController: UIViewController {
     //포켓몬 이미지를 가져오는 함수
     private func fetchPokemonData() {
         let urlComponets = URLComponents(string: pokemonURL.createUrl())
-        
         guard let url = urlComponets?.url else {
             print("잘못된 URL")
             return
@@ -89,7 +87,6 @@ class PhoneBookViewController: UIViewController {
         fetchPokemonData()
         fetchPokemonKRName()
     }
-    
 }
 
 extension PhoneBookViewController {
