@@ -9,8 +9,6 @@ import UIKit
 import SnapKit
 
 class FistViewController: UIViewController {
-    var dummyArray: [Dummy] = []
-    var dummyData = DummyData()
     private var phoneBookDataArray: [PhoneBookData] = []
    
     override func viewDidLoad() {
@@ -18,14 +16,13 @@ class FistViewController: UIViewController {
         print(#function)
         setupNaviBar()
         configureUI()
-        dummyData.makeDummyData()
-        dummyArray = dummyData.getDummyDate()
+        PhoneBookDataManager.dataManager.readData()
     }
     override func viewWillAppear(_ animated: Bool) {
         print(#function)
-        PhoneBookDataManager.dataManager.readData()
-        phoneBookDataArray = PhoneBookDataManager.dataManager.getPhoneBookData()
         tableView.reloadData()
+        phoneBookDataArray = PhoneBookDataManager.dataManager.getPhoneBookData()
+        print("배열갯수: \(phoneBookDataArray.count)")
     }
     
     private lazy var tableView: UITableView = {
@@ -82,6 +79,9 @@ extension FistViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.id) as? TableViewCell else {
             return UITableViewCell()
         }
+        //코어데이터에 저장되어있는 이미지 String(base64Encoded)을 UIimage형태로 다시 변환해서 실제 이미지를 나타냅니다.
+        /// 흐름:  이미지 저장 : UIImage - Data  -  String(base64EncodedString)
+        ///이미지 출력: String(base64EncodedString) - Data - UIImage
         cell.profileImage.image = UIImage(data: Data(base64Encoded: phoneBookDataArray[indexPath.row].image)!)
         cell.nameLabel.text = phoneBookDataArray[indexPath.row].name
         cell.phoneLabel.text = phoneBookDataArray[indexPath.row].phoneNumber

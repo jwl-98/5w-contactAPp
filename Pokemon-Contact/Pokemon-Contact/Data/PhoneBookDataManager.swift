@@ -33,6 +33,7 @@ class PhoneBookDataManager {
         }
     }
     func readData() {
+        print(#function)
        do{
            let phoneBooks = try self.container.viewContext.fetch(PhoneBook.fetchRequest())
            
@@ -40,7 +41,7 @@ class PhoneBookDataManager {
                if let name = phoneBook.value(forKey: PhoneBook.Key.name) as? String,
                   let phoneNumber = phoneBook.value(forKey: PhoneBook.Key.phoneNumber)  as? String,
                   let image = phoneBook.value(forKey: PhoneBook.Key.image) as? String {
-                   PhoneBookDataManager.dataManager.createDataAarry(image: image, name: name, phoneNumber: phoneNumber)
+                   createDataAarry(image: image, name: name, phoneNumber: phoneNumber)
                }
            }
        } catch {
@@ -48,10 +49,11 @@ class PhoneBookDataManager {
        }
    }
     func createDataAarry(image: String, name: String, phoneNumber: String) {
+        print(#function)
         let phoneBookData = PhoneBookData(image: image, name: name, phoneNumber: phoneNumber)
+        
         phoneBookDataArray.append(phoneBookData)
         
-        print(phoneBookDataArray.count)
     }
     
     func getPhoneBookData() -> [PhoneBookData] {
