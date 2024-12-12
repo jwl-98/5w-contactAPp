@@ -9,8 +9,7 @@ import UIKit
 import SnapKit
 
 class FistViewController: UIViewController {
-    var dummyArray: [Dummy] = []
-    var dummyData = DummyData()
+
     private var phoneBookDataArray: [PhoneBookData] = []
     
     override func viewDidLoad() {
@@ -18,8 +17,6 @@ class FistViewController: UIViewController {
         print(#function)
         setupNaviBar()
         configureUI()
-        dummyData.makeDummyData()
-        dummyArray = dummyData.getDummyDate()
     }
     override func viewWillAppear(_ animated: Bool) {
         //뷰가 나타나기전 데이터 Read
