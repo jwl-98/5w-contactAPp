@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E2B989342D095CB0009AEF23 /* PhoneBook+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B989322D095CB0009AEF23 /* PhoneBook+CoreDataProperties.swift */; };
 		E2CC0BA02D05B37B00FBAC94 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E2CC0B9F2D05B37B00FBAC94 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E2B989322D095CB0009AEF23 /* PhoneBook+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhoneBook+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		E2CC0B762D05B1B200FBAC94 /* Pokemon-Contact.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Pokemon-Contact.app"; path = "/Users/macintosh/5w-devs/contactApp/5w-contactApp/Pokemon-Contact/build/Debug-iphoneos/Pokemon-Contact.app"; sourceTree = "<absolute>"; };
+		E2CC0B762D05B1B200FBAC94 /* Pokemon-Contact.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pokemon-Contact.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -53,8 +51,16 @@
 			isa = PBXGroup;
 			children = (
 				E2CC0B782D05B1B200FBAC94 /* Pokemon-Contact */,
-				E2B989322D095CB0009AEF23 /* PhoneBook+CoreDataProperties.swift */,
+				E2CC0B772D05B1B200FBAC94 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		E2CC0B772D05B1B200FBAC94 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E2CC0B762D05B1B200FBAC94 /* Pokemon-Contact.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -111,7 +117,7 @@
 				E2CC0B9E2D05B37B00FBAC94 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = E2CC0B6D2D05B1B200FBAC94;
+			productRefGroup = E2CC0B772D05B1B200FBAC94 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -135,7 +141,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2B989342D095CB0009AEF23 /* PhoneBook+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,7 +158,6 @@
 				INFOPLIST_FILE = "Pokemon-Contact/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
@@ -185,7 +189,6 @@
 				INFOPLIST_FILE = "Pokemon-Contact/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;

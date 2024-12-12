@@ -13,13 +13,12 @@ class PhoneBookViewController: UIViewController {
     let jsonDecoder = JsonDecoder()
     var pokemonURL = PokemonUrl()
     
-    
-    
     override func loadView() {
         view = phoneBookView
         setupNaviBar()
         setupAppTarget()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -30,7 +29,6 @@ class PhoneBookViewController: UIViewController {
     //포켓몬 이미지를 가져오는 함수
     private func fetchPokemonData() {
         let urlComponets = URLComponents(string: pokemonURL.createUrl())
-        
         guard let url = urlComponets?.url else {
             print("잘못된 URL")
             return
@@ -74,13 +72,11 @@ class PhoneBookViewController: UIViewController {
         phoneBookView.randomButton.addTarget(self, action: #selector(randomButtonTapped), for: .touchUpInside)
     }
     @objc func applyButtonTapped() {
-        guard let saveName = phoneBookView.nameTextView.text , let saveNumber = phoneBookView.phoneNumberTextView.text,
-              //이미지뷰에 적용된 이미지의 경우 데이터 타입으로 저장
-              let saveImage = phoneBookView.imageView.image?.pngData() else {
+        guard let saveName = phoneBookView.nameTextView.text , let saveNumber = phoneBookView.phoneNumberTextView.text, let saveImage = phoneBookView.imageView.image?.pngData() else {
             errorAlert(title: "에러", message: "데이터를 입력하세요!")
             return
         }
-        //코어데이터에 저장, 이미지의 경우 데이터 타입을 String으로 변환해서 저장
+        print(saveImage.description)
         PhoneBookDataManager.dataManager.createData(image: saveImage.base64EncodedString(), name: saveName, phoneNumber: saveNumber)
         saveCompleteAlert(title: "저장완료", message: "저장되었습니다.")
     }
@@ -91,7 +87,6 @@ class PhoneBookViewController: UIViewController {
         fetchPokemonData()
         fetchPokemonKRName()
     }
-    
 }
 
 extension PhoneBookViewController {
