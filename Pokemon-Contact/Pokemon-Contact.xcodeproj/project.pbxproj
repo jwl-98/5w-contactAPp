@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E2B989342D095CB0009AEF23 /* PhoneBook+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B989322D095CB0009AEF23 /* PhoneBook+CoreDataProperties.swift */; };
 		E2CC0BA02D05B37B00FBAC94 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E2CC0B9F2D05B37B00FBAC94 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E2B989322D095CB0009AEF23 /* PhoneBook+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhoneBook+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E2CC0B762D05B1B200FBAC94 /* Pokemon-Contact.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Pokemon-Contact.app"; path = "/Users/macintosh/5w-devs/contactApp/5w-contactApp/Pokemon-Contact/build/Debug-iphoneos/Pokemon-Contact.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -51,6 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				E2CC0B782D05B1B200FBAC94 /* Pokemon-Contact */,
+				E2B989322D095CB0009AEF23 /* PhoneBook+CoreDataProperties.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,6 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2B989342D095CB0009AEF23 /* PhoneBook+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

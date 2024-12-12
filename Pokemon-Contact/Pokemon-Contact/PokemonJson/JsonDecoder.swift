@@ -8,9 +8,9 @@
 import Foundation
 
 class JsonDecoder {
-    
+
     //json디코딩 함수
-    func fetchJsonData<JSON: Decodable>(url: URL, completion: @escaping (JSON?) -> Void){
+     func fetchJsonData<JSON: Decodable>(url: URL, completion: @escaping (JSON?) -> Void){
         let session = URLSession(configuration: .default)
         session.dataTask(with: URLRequest(url: url)) { data, response, error in
             guard let data, error == nil else {

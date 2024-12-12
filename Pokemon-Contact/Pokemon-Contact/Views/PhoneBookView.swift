@@ -9,15 +9,6 @@ import UIKit
 
 class PhoneBookView: UIView {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = .white
-        configureUI()
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     var imageView: UIImageView = {
         let imageView = UIImageView()
         
@@ -37,6 +28,15 @@ class PhoneBookView: UIView {
         button.setTitleColor(UIColor.gray, for: .normal)
         
         return button
+    }()
+    private var textViewStackView: UIStackView = {
+        let stackView = UIStackView()
+        
+        stackView.spacing = 5
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        
+        return stackView
     }()
     var nameTextView: UITextView = {
         let textView = UITextView()
@@ -59,16 +59,6 @@ class PhoneBookView: UIView {
         textView.clipsToBounds = true
         textView.keyboardType = .numberPad
         return textView
-    }()
-    
-    private var textViewStackView: UIStackView = {
-        let stackView = UIStackView()
-        
-        stackView.spacing = 5
-        stackView.distribution = .fillEqually
-        stackView.axis = .vertical
-        
-        return stackView
     }()
     
     private func configureUI() {
@@ -102,6 +92,18 @@ class PhoneBookView: UIView {
             $0.height.equalTo(80)
         }
     }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .white
+        configureUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 }
+//#Preview {
+//    PhoneBookViewController()
+//}
 

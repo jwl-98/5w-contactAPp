@@ -12,7 +12,7 @@ class FistViewController: UIViewController {
     var dummyArray: [Dummy] = []
     var dummyData = DummyData()
     private var phoneBookDataArray: [PhoneBookData] = []
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         print(#function)
@@ -22,18 +22,10 @@ class FistViewController: UIViewController {
         dummyArray = dummyData.getDummyDate()
     }
     override func viewWillAppear(_ animated: Bool) {
-        //뷰가 나타나기전 데이터 Read
+        print(#function)
         PhoneBookDataManager.dataManager.readData()
         phoneBookDataArray = PhoneBookDataManager.dataManager.getPhoneBookData()
         tableView.reloadData()
-    }
-    
-    @objc private func naviBarButtonTapped() {
-        let phoneBookVC = PhoneBookViewController()
-        
-        phoneBookVC.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(phoneBookVC, animated: true)
-        print("네비버튼눌림")
     }
     
     private lazy var tableView: UITableView = {
@@ -57,11 +49,19 @@ class FistViewController: UIViewController {
             $0.bottom.equalToSuperview()
         }
     }
+    
+   @objc private func naviBarButtonTapped() {
+       let phoneBookVC = PhoneBookViewController()
+    
+       phoneBookVC.modalPresentationStyle = .fullScreen
+       //self.present(phoneBookVC, animated: true, completion: nil)
+       navigationController?.pushViewController(phoneBookVC, animated: true)
+       print("네비버튼눌림")
+    }
 }
 //네비게이션 바 설정
 extension FistViewController {
-    
-    private func setupNaviBar() {
+    func setupNaviBar() {
         let appearance = UINavigationBarAppearance()
         let button = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(naviBarButtonTapped))
         navigationItem.rightBarButtonItem = button
@@ -82,10 +82,6 @@ extension FistViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.id) as? TableViewCell else {
             return UITableViewCell()
         }
-        
-        //코어데이터에 저장되어있는 이미지 String(base64Encoded)을 UIimage형태로 다시 변환해서 실제 이미지를 나타냅니다.
-        /// 이미지 저장 (PhoneBookViewController에서): UIImage - Data  -  String(base64EncodedString)
-        ///이미지 출력: String(base64EncodedString) - Data - UIImage
         cell.profileImage.image = UIImage(data: Data(base64Encoded: phoneBookDataArray[indexPath.row].image)!)
         cell.nameLabel.text = phoneBookDataArray[indexPath.row].name
         cell.phoneLabel.text = phoneBookDataArray[indexPath.row].phoneNumber

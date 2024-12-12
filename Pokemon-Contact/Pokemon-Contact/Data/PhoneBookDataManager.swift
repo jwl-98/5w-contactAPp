@@ -9,7 +9,6 @@ import CoreData
 import UIKit
 
 class PhoneBookDataManager {
-    //데이터를 전제적으로 공유하기 위한 싱글톤 패턴 선언
     static let dataManager = PhoneBookDataManager()
     private var phoneBookDataArray: [PhoneBookData] = []
     var container: NSPersistentContainer!
@@ -34,17 +33,14 @@ class PhoneBookDataManager {
         }
     }
     func readData() {
-        //데이터를 읽을때마다 기존배열은 초기화
-        phoneBookDataArray = []
-        print(#function)
        do{
            let phoneBooks = try self.container.viewContext.fetch(PhoneBook.fetchRequest())
            
            for phoneBook in phoneBooks as [NSManagedObject] {
-               if let image = phoneBook.value(forKey: PhoneBook.Key.image) as? String,
-                    let name = phoneBook.value(forKey: PhoneBook.Key.name) as? String,
-                  let phoneNumber = phoneBook.value(forKey: PhoneBook.Key.phoneNumber)  as? String {
-                   createDataAarry(image: image, name: name, phoneNumber: phoneNumber)
+               if let name = phoneBook.value(forKey: PhoneBook.Key.name) as? String,
+                  let phoneNumber = phoneBook.value(forKey: PhoneBook.Key.phoneNumber)  as? String,
+                  let image = phoneBook.value(forKey: PhoneBook.Key.image) as? String {
+                   PhoneBookDataManager.dataManager.createDataAarry(image: image, name: name, phoneNumber: phoneNumber)
                }
            }
        } catch {
@@ -54,8 +50,10 @@ class PhoneBookDataManager {
     func createDataAarry(image: String, name: String, phoneNumber: String) {
         let phoneBookData = PhoneBookData(image: image, name: name, phoneNumber: phoneNumber)
         phoneBookDataArray.append(phoneBookData)
-        print("갯수: \(phoneBookDataArray.count)")
+        
+        print(phoneBookDataArray.count)
     }
+    
     func getPhoneBookData() -> [PhoneBookData] {
         print(#function)
         return phoneBookDataArray
