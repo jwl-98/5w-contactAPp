@@ -28,50 +28,50 @@
 
 ## 3. 프로젝트 구조
 ```shell
-Pokemon-Contact
-    ├── Pokemon-Contact
-    │   ├── Controller
-    │   │   ├── FirstViewController.swift
-    │   │   └── PhoneBookViewController.swift
-    │   ├── Data
-    │   │   ├── CoreData
-    │   │   │   ├── PhoneBook+CoreDataClass.swift
-    │   │   │   ├── PhoneBook+CoreDataProperties.swift
-    │   │   │   └── PhoneBookModel.xcdatamodeld
-    │   │   │       └── PhoneBookModel.xcdatamodel
-    │   │   │           └── contents
-    │   │   ├── PhoneBookData.swift
-    │   │   └── PhoneBookDataManager.swift
-    │   ├── Delegate
-    │   │   ├── AppDelegate.swift
-    │   │   └── SceneDelegate.swift
-    │   ├── Info.plist
-    │   ├── PokemonJson
-    │   │   ├── JsonDecoder.swift
-    │   │   ├── KRNameJson.swift
-    │   │   └── PokemonDataJson.swift
-    │   ├── Utility
-    │   │   └── PokemonUrl.swift
-    │   └── Views
-    │       ├── Base.lproj
-    │       │   └── LaunchScreen.storyboard
-    │       ├── PhoneBookView.swift
-    │       └── TableViewCell.swift
-    └── Pokemon-Contact.xcodeproj
-        ├── project.pbxproj
-        ├── project.xcworkspace
-        │   ├── contents.xcworkspacedata
-        │   ├── xcshareddata
-        │   │   └── swiftpm
-        │   │       ├── Package.resolved
-        │   │       └── configuration
-        │   └── xcuserdata
-        │       └── macintosh.xcuserdatad
-        │           └── UserInterfaceState.xcuserstate
-        └── xcuserdata
-            └── macintosh.xcuserdatad
-                ├── xcdebugger
-                │   └── Breakpoints_v2.xcbkptlist
-                └── xcschemes
-                    └── xcschememanagement.plist
+ Pokemon-Contact
+│   ├── Pokemon-Contact
+│   │   ├── Controller
+│   │   │   ├── FirstViewController.swift
+│   │   │   └── PhoneBookViewController.swift
+│   │   ├── Data
+│   │   │   ├── CoreData
+│   │   │   │   ├── PhoneBook+CoreDataClass.swift
+│   │   │   │   ├── PhoneBook+CoreDataProperties.swift
+│   │   │   │   └── PhoneBookModel.xcdatamodeld
+│   │   │   │       └── PhoneBookModel.xcdatamodel
+│   │   │   │           └── contents
+│   │   │   ├── PhoneBookData.swift
+│   │   │   └── PhoneBookDataManager.swift
+│   │   ├── Delegate
+│   │   │   ├── AppDelegate.swift
+│   │   │   └── SceneDelegate.swift
+│   │   ├── Info.plist
+│   │   ├── PokemonJson
+│   │   │   ├── JsonDecoder.swift
+│   │   │   ├── KRNameJson.swift
+│   │   │   ├── PokemonDataJson.swift
+│   │   │   └── PokemonUrl.swift
+│   │   └── Views
+│   │       ├── Base.lproj
+│   │       │   └── LaunchScreen.storyboard
+│   │       ├── PhoneBookView.swift
+│   │       └── TableViewCell.swift
+│   └── Pokemon-Contact.xcodeproj
+│       ├── project.pbxproj
+│       ├── project.xcworkspace
+│       │   ├── contents.xcworkspacedata
+│       │   ├── xcshareddata
+│       │   │   └── swiftpm
+│       │   │       ├── Package.resolved
+│       │   │       └── configuration
+│       │   └── xcuserdata
+│       │       └── macintosh.xcuserdatad
+│       │           └── UserInterfaceState.xcuserstate
+│       └── xcuserdata
+│           └── macintosh.xcuserdatad
+│               ├── xcdebugger
+│               │   └── Breakpoints_v2.xcbkptlist
+│               └── xcschemes
+│                   └── xcschememanagement.plist
+└── README.md
 ```
