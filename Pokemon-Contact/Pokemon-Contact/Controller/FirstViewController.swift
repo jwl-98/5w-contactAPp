@@ -18,6 +18,7 @@ class FirstViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         tableViewSetup()
         setupNaviBar()
     }
@@ -34,7 +35,12 @@ class FirstViewController: UIViewController {
         firstView.tableView.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.id)
         firstView.tableView.rowHeight = 80
     }
-    
+    private func setupNaviBar() {
+        navigationController?.isNavigationBarHidden = false
+        navigationItem.title = "친구목록"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가", style: .done, target: self, action: #selector(naviBarButtonTapped))
+    }
+
     @objc private func naviBarButtonTapped() {
         let phoneBookVC = PhoneBookViewController()
         
@@ -44,25 +50,7 @@ class FirstViewController: UIViewController {
     }
   
 }
-//네비게이션 바 설정
-extension FirstViewController {
-    
-    private func setupNaviBar() {
-        let appearance = UINavigationBarAppearance()
-        let button = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(naviBarButtonTapped))
-        navigationItem.rightBarButtonItem = button
-        button.tintColor = .darkGray
-        appearance.configureWithOpaqueBackground()
-        appearance.titleTextAttributes =  [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
-        appearance.backgroundColor = .white
-        navigationController?.navigationBar.tintColor = .systemBlue
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.compactAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        title = "친구목록"
-    }
-    
-}
+
 extension FirstViewController: UITableViewDataSource,UITableViewDelegate  {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.id) as? TableViewCell else {
@@ -84,6 +72,4 @@ extension FirstViewController: UITableViewDataSource,UITableViewDelegate  {
 }
 
 
-//#Preview {
-//    FirstViewController()
-//}
+
