@@ -8,21 +8,31 @@
 import UIKit
 import SnapKit
 
-class FistViewController: UIViewController {
+class FirstViewController: UIViewController {
 
     private var phoneBookDataArray: [PhoneBookData] = []
+    let firstView = FistView()
     
+    override func loadView() {
+        view = firstView
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(#function)
+        tableViewSetup()
         setupNaviBar()
-        configureUI()
     }
     override func viewWillAppear(_ animated: Bool) {
         //뷰가 나타나기전 데이터 Read
         PhoneBookDataManager.dataManager.readData()
         phoneBookDataArray = PhoneBookDataManager.dataManager.getPhoneBookData()
-        tableView.reloadData()
+        firstView.tableView.reloadData()
+    }
+    
+    private func tableViewSetup() {
+        firstView.tableView.dataSource = self
+        firstView.tableView.delegate = self
+        firstView.tableView.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.id)
+        firstView.tableView.rowHeight = 80
     }
     
     @objc private func naviBarButtonTapped() {
@@ -32,31 +42,10 @@ class FistViewController: UIViewController {
         navigationController?.pushViewController(phoneBookVC, animated: true)
         print("네비버튼눌림")
     }
-    
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.id)
-        
-        return tableView
-    }()
-    
-    private func configureUI() {
-        [
-            tableView,
-        ].forEach{view.addSubview($0)}
-        
-        tableView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
-        }
-    }
+  
 }
 //네비게이션 바 설정
-extension FistViewController {
+extension FirstViewController {
     
     private func setupNaviBar() {
         let appearance = UINavigationBarAppearance()
@@ -74,7 +63,7 @@ extension FistViewController {
     }
     
 }
-extension FistViewController: UITableViewDataSource {
+extension FirstViewController: UITableViewDataSource,UITableViewDelegate  {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.id) as? TableViewCell else {
             return UITableViewCell()
@@ -92,10 +81,9 @@ extension FistViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return phoneBookDataArray.count
     }
-    
 }
-extension FistViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        80
-    }
-}
+
+
+//#Preview {
+//    FirstViewController()
+//}
