@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         //네비게이션 컨트롤러 탑재
-        window.rootViewController = UINavigationController(rootViewController: FistViewController())
+        window.rootViewController = ViewController()
         window.makeKeyAndVisible()
         self.window = window
         

@@ -37,50 +37,32 @@ Data에 관한 공식문서 확인후 Base-64 Encoding라는 개념내 String타
 
 ## 3. 프로젝트 구조
 ```shell
- Pokemon-Contact
-│   ├── Pokemon-Contact
-│   │   ├── Controller
-│   │   │   ├── FirstViewController.swift
-│   │   │   └── PhoneBookViewController.swift
-│   │   ├── Data
-│   │   │   ├── CoreData
-│   │   │   │   ├── PhoneBook+CoreDataClass.swift
-│   │   │   │   ├── PhoneBook+CoreDataProperties.swift
-│   │   │   │   └── PhoneBookModel.xcdatamodeld
-│   │   │   │       └── PhoneBookModel.xcdatamodel
-│   │   │   │           └── contents
-│   │   │   ├── PhoneBookData.swift
-│   │   │   └── PhoneBookDataManager.swift
-│   │   ├── Delegate
-│   │   │   ├── AppDelegate.swift
-│   │   │   └── SceneDelegate.swift
-│   │   ├── Info.plist
-│   │   ├── PokemonJson
-│   │   │   ├── JsonDecoder.swift
-│   │   │   ├── KRNameJson.swift
-│   │   │   ├── PokemonDataJson.swift
-│   │   │   └── PokemonUrl.swift
-│   │   └── Views
-│   │       ├── Base.lproj
-│   │       │   └── LaunchScreen.storyboard
-│   │       ├── PhoneBookView.swift
-│   │       └── TableViewCell.swift
-│   └── Pokemon-Contact.xcodeproj
-│       ├── project.pbxproj
-│       ├── project.xcworkspace
-│       │   ├── contents.xcworkspacedata
-│       │   ├── xcshareddata
-│       │   │   └── swiftpm
-│       │   │       ├── Package.resolved
-│       │   │       └── configuration
-│       │   └── xcuserdata
-│       │       └── macintosh.xcuserdatad
-│       │           └── UserInterfaceState.xcuserstate
-│       └── xcuserdata
-│           └── macintosh.xcuserdatad
-│               ├── xcdebugger
-│               │   └── Breakpoints_v2.xcbkptlist
-│               └── xcschemes
-│                   └── xcschememanagement.plist
-└── README.md
+├── Controller
+│   ├── AppDelegate.swift
+│   ├── FirstViewController.swift
+│   ├── PhoneBookViewController.swift
+│   ├── SceneDelegate.swift
+│   └── ViewController.swift
+├── Info.plist
+├── Model
+│   ├── APIModel
+│   │   ├── JsonDecoder.swift
+│   │   ├── KoreanNameJson.swift
+│   │   ├── PokemonDataJson.swift
+│   │   └── PokemonUrl.swift
+│   └── DataModel
+│       ├── PhoneBook+CoreDataClass.swift
+│       ├── PhoneBook+CoreDataProperties.swift
+│       ├── PhoneBookData.swift
+│       ├── PhoneBookDataManager.swift
+│       └── PhoneBookModel.xcdatamodeld
+│           └── PhoneBookModel.xcdatamodel
+│               └── contents
+└── Views
+    ├── Base.lproj
+    │   └── LaunchScreen.storyboard
+    ├── FistView.swift
+    ├── PhoneBookView.swift
+    └── TableViewCell.swift
+
 ```

@@ -15,12 +15,12 @@ class PhoneBookViewController: UIViewController {
     
     override func loadView() {
         view = phoneBookView
-        setupNaviBar()
-        setupAppTarget()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNaviBar()
+        setupAppTarget()
     }
     
     private func createURL() {
@@ -76,7 +76,6 @@ class PhoneBookViewController: UIViewController {
             errorAlert(title: "에러", message: "데이터를 입력하세요!")
             return
         }
-        print(saveImage.description)
         PhoneBookDataManager.dataManager.createData(image: saveImage.base64EncodedString(), name: saveName, phoneNumber: saveNumber)
         saveCompleteAlert(title: "저장완료", message: "저장되었습니다.")
     }
@@ -92,12 +91,10 @@ class PhoneBookViewController: UIViewController {
 extension PhoneBookViewController {
     //네비게이션바 설정
    private func setupNaviBar() {
-        let appearance = UINavigationBarAppearance()
-        let rightButton = UIBarButtonItem(title: "적용", style: .plain, target: self, action: #selector(applyButtonTapped))
-        navigationItem.rightBarButtonItem = rightButton
-        //네비게이션바 텍스트 설정
-        appearance.titleTextAttributes =  [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
-        title = "연락처 추가"
+       //VC에서 한번 감쌋다. nil이 아니기 때문에 설정값을 줄수 있음.
+       navigationController?.isNavigationBarHidden = false
+       navigationItem.title = "연락처 추가"
+       navigationItem.rightBarButtonItem = UIBarButtonItem(title: "적용", style: .done, target: self, action: #selector(applyButtonTapped))
     }
     //저장완료 알림창
     private func saveCompleteAlert(title: String, message: String) {
@@ -114,4 +111,5 @@ extension PhoneBookViewController {
         self.present(alert, animated: true, completion: nil)
     }
 }
+
 
